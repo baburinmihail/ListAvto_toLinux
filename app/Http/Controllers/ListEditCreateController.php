@@ -75,15 +75,16 @@ class ListEditCreateController extends Controller
 
         //sql запрос на получения данных из таблицы с автомобилями
         $sql_avto = mysqli_query($connect, "SELECT * FROM `avtomobils` WHERE `mark`= '$bild[mark]' AND `gosnomer`= '$bild[gosnomer]' ");
-        
+
         //$sql_avto = mysqli_fetch_assoc($sql_avto);
-        
+
         //echo '<pre>';
         //print_r($sql_avto);
         //echo '</pre>';
 
         $avto_array = mysqli_fetch_row($sql_avto);
 
+        $avtoid = $avto_array[0];
         $avtoMark = $avto_array[1];
         $avtoNomer = $avto_array[2];
         $avtoNormaSummer = $avto_array[3];
@@ -91,7 +92,7 @@ class ListEditCreateController extends Controller
         $avtoGsmNewDay = $avto_array[5];
         $avtoSpedomentr = $avto_array[6];
 
-        //sql запрос на получения одного запроса отсортированного по времени создания в таблице листов гсм 
+        //sql запрос на получения одного запроса отсортированного по времени создания в таблице листов гсм
         $sql_gsm_list = mysqli_query ($connect, "SELECT * FROM `list_gsms` WHERE `car_name`= '$bild[mark]' AND `state_number`= '$bild[gosnomer]' ORDER BY `list_gsms`.`id` DESC LIMIT 1  ");
         $sql_gsm_list1 = mysqli_fetch_assoc($sql_gsm_list);
 
@@ -104,7 +105,7 @@ class ListEditCreateController extends Controller
             $sql_gsm_list1['car_name'] = $avtoMark;
             $sql_gsm_list1['state_number'] = $avtoNomer;
             $sql_gsm_list1['remainder_gsm_end'] = $avtoGsmNewDay;
-
+            $sql_gsm_list1['category_id'] = $avtoid;
 
         }else{}
 
@@ -114,6 +115,7 @@ class ListEditCreateController extends Controller
         $car_name = $sql_gsm_list1['car_name'];
         $state_number = $sql_gsm_list1['state_number'];
         $gsm_list_gsm_end = $sql_gsm_list1['remainder_gsm_end'];
+        $gsm_list_category_id = $sql_gsm_list1['category_id'];
 
 
         //$gsm_list_probek = $gsm_list_array[0];
@@ -137,7 +139,7 @@ class ListEditCreateController extends Controller
 
             'avtoNormaSummer' => $avtoNormaSummer,
             'avtoNormaWinter' => $avtoNormaWinter,
-            
+            'category_id'=>$gsm_list_category_id,
         ]);
     }
 
@@ -170,13 +172,14 @@ class ListEditCreateController extends Controller
         $new_gsm -> gsm_consumption = $request -> gsm_consumption;
         $new_gsm -> economy = $request -> economy;
         $new_gsm -> remainder_gsm_end = $request -> remainder_gsm_end;
-        
+
         $new_gsm -> added_at = $request -> added_at;
         $new_gsm -> drivers_fio = $request -> drivers_fio;
         $new_gsm -> season = $request -> season;
         $new_gsm -> fact = $request -> fact;
+        $new_gsm -> category_id = $request -> category_id;
 
-        
+
 
         $new_gsm -> save();
         $bild->save();

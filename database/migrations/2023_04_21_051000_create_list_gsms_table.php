@@ -35,8 +35,7 @@ class CreateListGsmsTable extends Migration
             $table->string('season');
             $table->string('fact');
 
-
-
+            $table->unsignedBigInteger('category_id');
 
             $table->timestamps();
         });

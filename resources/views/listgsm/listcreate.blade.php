@@ -14,14 +14,14 @@
                     <div class="col-md-12"><h2>Создание листа ГСМ</h2></div>
                     <!--1.title-->
                     <div class="col-md-8">
-                        Показания спидометра начало 
+                        Показания спидометра начало
                     </div>
                     <div class="col-md-4">
                         <input min="0" step="0.001" type="number" name="title" id="title" class="title" value="{{$speedometer_end}}"   placeholder="Показания спидометра начало " readonly required>
                     </div>
                     <!--2.speedometer_end-->
                     <div class="col-md-8">
-                        Показания спидометра 
+                        Показания спидометра
                     </div>
                     <div class="col-md-4">
                         <input min="0" step="0.001" type="number" name="speedometer_end" id="speedometer_end" style="background: #dfe0e1" class="speedometer_end"  placeholder="Показания спидометра конец" required>
@@ -119,6 +119,13 @@
                     <!--15.season-->
                     <div class="col-md-8">
                         Норма времени года
+                    </div>
+                    <!--16.category_id-->
+                    <div class="col-md-8">
+                        category_id
+                    </div>
+                    <div class="col-md-4">
+                        <input min="0" step="0.001" type="number" name="category_id" id="category_id" class="category_id" value="{{$category_id}}"   placeholder="Показания спидометра начало " readonly required>
                     </div>
                     <div class="col-md-4">
                     <!--<input name="season" class="season" type="text" placeholder="Норма времени года" required>-->
