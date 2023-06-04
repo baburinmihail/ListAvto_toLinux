@@ -29,7 +29,7 @@ class GsmController extends Controller
      */
     public function index(ListGsmFilter $request)
     {
-        $gsm = ListGsm::filter($request)->paginate(10);
+        $gsm = ListGsm::filter($request)->orderBy('created_at','desc')->paginate(10);
         //$gsm = ListGsm::orderBy('created_at','desc')->get();
         $categories = Avtomobil::all();
 

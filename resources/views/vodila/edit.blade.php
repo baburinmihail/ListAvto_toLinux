@@ -7,37 +7,41 @@
         @if (session('success'))
             <h4>{{session('success')}}</h4>
         @endif
-        <form  action="{{ route('peaple.update',$peaple['id']) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="row mb-2" >
-                <div class="col-md-12">Изменения данных водителя</div>
-                <div class="col-md-8">
-                    Имя
-                </div>
-                <div class="col-md-4">
-                    <input name="nameD" id="nameD" class="firstName" type="text" value="{{ $peaple['nameD'] }}" placeholder="Иван">
-                </div>
-                <div class="col-md-8">
-                    Фамилия
-                </div>
-                <div class="col-md-4">
-                    <input name="surnameD" id="surname" class="lastName" type="text" value="{{ $peaple['surnameD'] }}" placeholder="Иванов">
-                </div>
-                <div class="col-md-8">
-                    Отчество
-                </div>
-                <div class="col-md-4">
-                    <input name="atronymicD" id="atronymic" class="patronymic" value="{{ $peaple['atronymicD'] }}" type="text" placeholder="Иванович">
-                </div>
-                <div class="col-md-12" style="visibility: hidden">
-                    <input name="fullname" id="fullname" class="fullname" type="text" placeholder="fullname" value="value="{{ $peaple['atronymicD'] }}"" required>
-                </div>
-                <div class="col-md-12">
-                    <input name="submit" type="submit" value="Обновить">
-                </div>
+            <div class="table-responsive">
+                <form  action="{{ route('peaple.update',$peaple['id']) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="max-width: 150px"><h3>Изменения данных водителя</h3></th>
+                            <th scope="col"> </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="">
+                            <td scope="col">Имя</td>
+                            <td scope="col"><input name="nameD" id="nameD" class="nameD" type="text" value="{{ $peaple['nameD'] }}" placeholder="{{ $peaple['nameD'] }}" required></td>
+                        </tr>
+                        <tr class="">
+                            <td scope="col">Фамилия</td>
+                            <td scope="col"><input name="surnameD" id="surname" class="surnameD" value="{{ $peaple['surnameD'] }}" type="text" placeholder="{{ $peaple['surnameD'] }}" required></td>
+                        </tr>
+                        <tr class="">
+                            <td scope="col">Отчество</td>
+                            <td scope="col"><input name="atronymicD" id="atronymic" class="atronymicD" value="{{ $peaple['atronymicD'] }}" type="text" placeholder="{{ $peaple['atronymicD'] }}" required></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-md-12" style="visibility: hidden">
+                        <input name="fullname" id="fullname" class="fullname" type="text" value="{{ $peaple['atronymicD'] }}" placeholder="fullname" required>
+                    </div>
+                    <div class="col-md-12">
+                        <input name="submit" class="btn-2" style="background: #739655"  type="submit" value="Обновить">
+                    </div>
+                </form>
             </div>
-        </form>
+        <!---->
     </main>
     <script>
         document.querySelector('#nav-link_vodila').style.color= '#0093ff';

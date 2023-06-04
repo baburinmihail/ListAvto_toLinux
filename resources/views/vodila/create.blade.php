@@ -7,36 +7,39 @@
         @if (session('success'))
             <h4>{{session('success')}}</h4>
         @endif
-        <form  action="{{ route('peaple.store') }}" method="POST">
-            @csrf
-            <div class="row mb-2" >
-                <div class="col-md-12">Создание новой записи водителя</div>
-                <div class="col-md-8">
-                    Имя
-                </div>
-                <div class="col-md-4">
-                    <input name="nameD" id="nameD" class="nameD" type="text" placeholder="Иван" required>
-                </div>
-                <div class="col-md-8">
-                    Фамилия
-                </div>
-                <div class="col-md-4">
-                    <input name="surnameD" id="surname" class="surnameD" type="text" placeholder="Иванов" required>
-                </div>
-                <div class="col-md-8">
-                    Отчество
-                </div>
-                <div class="col-md-4">
-                    <input name="atronymicD" id="atronymic" class="atronymicD" type="text" placeholder="Иванович" required>
-                </div>
+        <div class="table-responsive">
+            <form  action="{{ route('peaple.store') }}" method="POST">
+                @csrf
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="max-width: 150px"><h3>Создание новой записи водителя</h3></th>
+                            <th scope="col"> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="">
+                            <td scope="col"  style="max-width: 150px">Имя</td>
+                            <td scope="col"><input name="nameD" id="nameD" class="nameD" type="text" placeholder="Иван" required></td>
+                        </tr>
+                        <tr class="">
+                            <td scope="col" >Фамилия</td>
+                            <td scope="col"><input name="surnameD" id="surname" class="surnameD" type="text" placeholder="Иванов" required></td>
+                        </tr>
+                        <tr class="">
+                            <td scope="col">Отчество</td>
+                            <td scope="col"><input name="atronymicD" id="atronymic" class="atronymicD" type="text" placeholder="Иванович" required></td>
+                        </tr>
+                    </tbody>
+                </table>
                 <div class="col-md-12" style="visibility: hidden">
                     <input name="fullname" id="fullname" class="fullname" type="text" placeholder="fullname" required>
                 </div>
                 <div class="col-md-12">
-                    <input name="submit" id type="submit" value="Создать">
+                    <input name="submit" class="btn-2" style="background: #739655"  type="submit" value="Создать">
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </main>
     <script>
         document.querySelector('#nav-link_vodila').style.color= '#0093ff';

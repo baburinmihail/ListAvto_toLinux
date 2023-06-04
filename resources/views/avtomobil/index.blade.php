@@ -36,12 +36,22 @@
                         <td>{{ $value['normatopliva_winter'] }}</td>
                         <td>{{ $value['gsm_end_new_day'] }}</td>
                         <td>{{ $value['speedometer_new_day'] }}</td>
-                        <td><a href="{{ route('avtomobil.edit', $value['id'] ) }}">редактировать</a></td>
+                        <td>
+                            <form action="{{ route('avtomobil.edit', $value['id'] ) }}" method="GET">
+                                @csrf
+                                @method('EDIT')
+                                <button id="{{ $value['id'] }}" type="submit" style="background: #739655"
+                                        class="btn-2 delete-btn"  {{ $value['car_name'] }}_{{$value['state_number']}}"
+                                href="">редактировать
+                                </button>
+                            </form>
+                        </td>
+
                         <td>
                             <form action="{{ route( 'avtomobil.destroy', $value['id'] ) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="delete-btn" href="">удалить</button>
+                                <button type="submit" style="background: #ea6059" class="btn-2 delete-btn" href="">удалить</button>
                             </form>
                         </td>
                     </tr>

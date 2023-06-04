@@ -22,7 +22,16 @@
                     <tr>
                         <td>{{ $value['mark'] }}</td>
                         <td>{{ $value['gosnomer'] }}</td>
-                        <td><a href="{{ route('bild.edit', $value['id'] ) }}">Создать лист</a></td>
+                        <td>
+                            <form action="{{ route('bild.edit', $value['id'] ) }}" method="GET">
+                                @csrf
+                                @method('EDIT')
+                                <button id="{{ $value['id'] }}" type="submit"
+                                        class="btn-2 delete-btn" >Создать лист
+                                </button>
+                            </form>
+                        </td>
+
                     </tr>
                 @endforeach
                 </tbody>

@@ -6,23 +6,20 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div>
             <form action="{{route('gsm.index')}}" method="get">
-                <!--
                 <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Search</label>
-                    <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" id="exampleFormControlInput1" placeholder="Type something">
+                    <label for="exampleFormControlInput1" class="form-label">Поиск по имени водителя</label>
+                    <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" id="exampleFormControlInput1" placeholder="Поиск по имени водителя">
                 </div>
-                -->
                 <div class="mb-3">
-                    <div class="form-label">Choose category</div>
+                    <div class="form-label">Выбор авто</div>
                     <select name="category_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                         <option></option>
                         @foreach($categories as $category)
                             <option value="{{$category->id}}" @if(isset($_GET['category_id'])) @if($_GET['category_id'] == $category->id) selected @endif @endif>{{$category->mark}}</option>
                         @endforeach
                     </select>
-                    
                 </div>
-                <button type="submit" style="background: #739655" class="btn-2 delete-btn">Submit</button>
+                <button type="submit" style="background: #739655" class="btn-2 delete-btn">Фильтрация</button>
             </form>
         </div>
         <div class="table-responsive">
@@ -54,44 +51,50 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php $n=0 ?>
                 @if (session('success'))
                     <h4>{{session('success')}}</h4>
                 @endif
                 @foreach($gsm  as $value)
-                    <tr>
-                        <td>{{ $value['title'] }}</td>
-                        <td>{{ $value['speedometer_end'] }}</td>
-                        <td>{{ $value['gsm_end'] }}</td>
-                        <td>{{ $value['car_name'] }}</td>
+                    <tr class="object" >
+                        <td  id="td-{{$n}}-0">{{ $value['title'] }}</td>
+                        <td id="td-{{$n}}-1">{{ $value['speedometer_end'] }}</td>
+                        <td id="td-{{$n}}-2">{{ $value['gsm_end'] }}</td>
+                        <td id="td-{{$n}}-3">{{ $value['car_name'] }}</td>
 
-                        <td>{{ $value['state_number'] }}</td>
-                        <td>{{ $value['consumption_rate'] }}</td>
-                        <td>{{ $value['mileage'] }}</td>
-                        <td>{{ $value['received_gsm_initially'] }}</td>
+                        <td id="td-{{$n}}-4" >{{ $value['state_number'] }}</td>
+                        <td id="td-{{$n}}-5" >{{ $value['consumption_rate'] }}</td>
+                        <td id="td-{{$n}}-6">{{ $value['mileage'] }}</td>
+                        <td id="td-{{$n}}-7">{{ $value['received_gsm_initially'] }}</td>
 
-                        <td>{{ $value['gsm_consumption'] }}</td>
-                        <td>{{ $value['fact'] }}</td>
-                        <td>{{ $value['economy'] }}</td>
-                        <td>{{ $value['remainder_gsm_end'] }}</td>
+                        <td id="td-{{$n}}-8">{{ $value['gsm_consumption'] }}</td>
+                        <td id="td-{{$n}}-9">{{ $value['fact'] }}</td>
+                        <td id="td-{{$n}}-10">{{ $value['economy'] }}</td>
+                        <td id="td-{{$n}}-11">{{ $value['remainder_gsm_end'] }}</td>
 
-                        <td>{{ $value['added_at'] }}</td>
-                        <td>{{ $value['drivers_fio'] }}</td>
-                        <td>{{ $value['season'] }}</td>
+                        <td id="td-{{$n}}-12">{{ $value['added_at'] }}</td>
+                        <td id="td-{{$n}}-13">{{ $value['drivers_fio'] }}</td>
+                        <td id="td-{{$n}}-14">{{ $value['season'] }}</td>
+
                         <td>
                             <form action="{{ route('gsm.edit', $value['id'] ) }}" method="GET">
                                 @csrf
                                 @method('EDIT')
-                                <button id="{{ $value['id'] }}" type="submit" style="background: #739655" class="btn-2 delete-btn {{ $value['car_name'] }}_{{$value['state_number']}}" href="">Экспорт</button>
+                                <button id="{{ $value['id'] }}" type="submit" style="background: #739655"
+                                        class="btn-2 delete-btn"  {{ $value['car_name'] }}_{{$value['state_number']}}"
+                                        href="">Экспорт
+                                </button>
                             </form>
                         </td>
                         <td>
                             <form action="{{ route( 'gsm.destroy', $value['id'] ) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button id="{{ $value['id'] }}" type="submit" class="btn-2 delete-btn {{ $value['car_name'] }}_{{$value['state_number']}}" href="">удалить</button>
+                                <button id="{{ $value['id'] }}" type="submit" style="background: #ea6059" class="btn-2 delete-btn {{ $value['car_name'] }}_{{$value['state_number']}}" href="">удалить</button>
                             </form>
                         </td>
                     </tr>
+                        <?php $n=$n+1;?>
                 @endforeach
                 </tbody>
             </table>

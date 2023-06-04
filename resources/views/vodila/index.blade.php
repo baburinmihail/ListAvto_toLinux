@@ -30,12 +30,21 @@
                         <td>{{ $value['nameD'] }}</td>
                         <td>{{ $value['surnameD'] }}</td>
                         <td>{{ $value['atronymicD'] }}</td>
-                        <td><a href="{{ route('peaple.edit', $value['id'] ) }}">редактировать</a></td>
+                        <td>
+                            <form action="{{ route('peaple.edit', $value['id'] ) }}" method="GET">
+                                @csrf
+                                @method('EDIT')
+                                <button id="{{ $value['id'] }}" type="submit" style="background: #739655"
+                                        class="btn-2 delete-btn"  {{ $value['car_name'] }}_{{$value['state_number']}}"
+                                href="">редактировать
+                                </button>
+                            </form>
+                        </td>
                         <td>
                             <form action="{{ route( 'peaple.destroy', $value['id'] ) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="delete-btn" href="">удалить</button>
+                                <button type="submit" style="background: #ea6059" class="btn-2 delete-btn" href="">удалить</button>
                             </form>
                         </td>
                     </tr>

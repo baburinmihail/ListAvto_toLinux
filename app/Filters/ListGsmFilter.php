@@ -9,8 +9,8 @@ class ListGsmFilter extends QueryFilter{
         });
     }
 
-    //public function search_field($search_string = ''){
-    //    return $this->builder
-    //        ->where('car_name', 'LIKE', '%'.$search_string.'%');
-    //}
+    public function search_field($search_string = ''){
+        return $this->builder->where('drivers_fio', 'LIKE', '%'.$search_string.'%');
+
+    }
 }
