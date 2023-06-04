@@ -7,6 +7,7 @@
  */
 namespace App\Http\Controllers;
 
+use App\Filters\ListGsmFilter;
 use App\Models\Avtomobil;
 use App\Models\ListGsm;
 use App\Models\Peaple;
@@ -26,14 +27,16 @@ class GsmController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ListGsmFilter $request)
     {
-        $gsm = ListGsm::orderBy('created_at','desc')->paginate(10);
+        $gsm = ListGsm::filter($request)->paginate(10);
         //$gsm = ListGsm::orderBy('created_at','desc')->get();
+        $categories = Avtomobil::all();
 
 
         return view('listgsm.index',[
             'gsm' => $gsm,
+            'categories' => $categories,
         ]);
     }
 
@@ -115,14 +118,14 @@ class GsmController extends Controller
      */
     public function edit(ListGsm $gsm)
     {
-       
-        
-     
+
+
+
         return view('listgsm.edit',[
             'gsm'=>$gsm
         ]);
 
-        
+
 
 
     }

@@ -4,6 +4,24 @@
 
 @section('content')
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        <div>
+            <form action="{{route('gsm.index')}}" method="get">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Search</label>
+                    <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" id="exampleFormControlInput1" placeholder="Type something">
+                </div>
+                <div class="mb-3">
+                    <div class="form-label">Choose category</div>
+                    <select name="category_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option></option>
+                        @foreach($categories as $category)
+                            <option value="{{$category->id}}" @if(isset($_GET['category_id'])) @if($_GET['category_id'] == $category->id) selected @endif @endif>{{$category->mark}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
         <div class="table-responsive">
             <table class="table table-striped table-sm">
                 <thead>
@@ -52,7 +70,7 @@
                         <td>{{ $value['fact'] }}</td>
                         <td>{{ $value['economy'] }}</td>
                         <td>{{ $value['remainder_gsm_end'] }}</td>
-                        
+
                         <td>{{ $value['added_at'] }}</td>
                         <td>{{ $value['drivers_fio'] }}</td>
                         <td>{{ $value['season'] }}</td>
@@ -69,7 +87,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {{ $gsm->onEachSide(10)->links() }}
+            {{ $gsm->withQueryString()->onEachSide(10)->links() }}
         </div>
     </main>
     <!-- Button trigger modal
