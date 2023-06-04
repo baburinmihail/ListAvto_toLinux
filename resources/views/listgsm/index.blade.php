@@ -6,10 +6,12 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
         <div>
             <form action="{{route('gsm.index')}}" method="get">
+                <!--
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Search</label>
                     <input name="search_field" @if(isset($_GET['search_field'])) value="{{$_GET['search_field']}}" @endif type="text" class="form-control" id="exampleFormControlInput1" placeholder="Type something">
                 </div>
+                -->
                 <div class="mb-3">
                     <div class="form-label">Choose category</div>
                     <select name="category_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
@@ -18,9 +20,9 @@
                             <option value="{{$category->id}}" @if(isset($_GET['category_id'])) @if($_GET['category_id'] == $category->id) selected @endif @endif>{{$category->mark}}</option>
                         @endforeach
                     </select>
+                    
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" style="background: #739655" class="btn-2 delete-btn">Submit</button>
             </form>
         </div>
         <div class="table-responsive">
@@ -75,8 +77,13 @@
                         <td>{{ $value['added_at'] }}</td>
                         <td>{{ $value['drivers_fio'] }}</td>
                         <td>{{ $value['season'] }}</td>
-
-                        <td><a href="{{ route('gsm.edit', $value['id'] ) }}"target="_blank">экспорт</a></td>
+                        <td>
+                            <form action="{{ route('gsm.edit', $value['id'] ) }}" method="GET">
+                                @csrf
+                                @method('EDIT')
+                                <button id="{{ $value['id'] }}" type="submit" style="background: #739655" class="btn-2 delete-btn {{ $value['car_name'] }}_{{$value['state_number']}}" href="">Экспорт</button>
+                            </form>
+                        </td>
                         <td>
                             <form action="{{ route( 'gsm.destroy', $value['id'] ) }}" method="POST">
                                 @csrf
